@@ -26,3 +26,16 @@ jobs:
     # SETUP MAVEN
     - name: Build with Maven
       run: mvn clean install
+
+    # SETUP DOCKER
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+       image: ${{ secrets.DOCKER_REPOSITORY }}
+       tags: latest
+       registry: docker.io
+       dockerfile: Dockerfile
+       username: ${{ secrets.DOCKER_HUB_USERNAME }}
+       password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+
